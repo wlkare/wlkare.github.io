@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="/css/main.css?v=7.4.0">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -25,10 +25,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Muse',
     version: '7.4.0',
     exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":null,"scrollpercent":true},
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":null,"scrollpercent":true},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -217,6 +217,8 @@
     
   </ul>
 
+    
+
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -252,8 +254,6 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-            
-
           <div id="content" class="content">
             
 
@@ -968,8 +968,7 @@ show_date_time();
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
-<script src="/js/schemes/pisces.js?v=7.4.0"></script>
-
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
 <script src="/js/next-boot.js?v=7.4.0"></script>
 
 
@@ -1033,6 +1032,12 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
   <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
   <script src="/live2d-widget/autoload.js"></script>
+  
+  <!-- 动态背景图片 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+  <script>
+  $("body").backstretch("/images/messageboard-bg.jpg");
+  </script>
 </body>
 </html>
 <!-- 页面点击小红心 -->

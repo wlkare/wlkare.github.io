@@ -1675,7 +1675,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #5086d4;
+  background: #dec7ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2902,4 +2902,13 @@ p {
 }
 .posts-expand .post-body img {
   border: 0px;
+}
+.post-body .image-caption,
+.post-body .figure .caption {
+  color: #999;
+  font-size: 0em;
+  font-weight: bold;
+  line-height: 1;
+  margin: -20px auto 15px;
+  text-align: center;
 }

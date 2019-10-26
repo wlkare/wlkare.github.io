@@ -1675,7 +1675,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #2bff96;
+  background: #ff5dff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2911,4 +2911,7 @@ p {
   line-height: 1;
   margin: -20px auto 15px;
   text-align: center;
+}
+.v .vlist .vcard .vhead .vsys {
+  font-size: 0em;
 }

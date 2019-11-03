@@ -1675,7 +1675,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff5dff;
+  background: #7ffb29;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2653,6 +2653,12 @@ hr {
   font-size: 13px;
   margin-top: 15px;
 }
+.post-block {
+  border-radius: 5px;
+  padding: 10px 30px 20px 30px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.12);
+  background: #fff;
+}
 .menu .menu-item a {
   font-size: 14px;
   color: #0f2e41;
@@ -2914,4 +2920,12 @@ p {
 }
 .v .vlist .vcard .vhead .vsys {
   font-size: 0em;
+}
+div#posts.posts-expand {
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-bottom: 10px;
+}
+.posts-expand article {
+  margin-top: 30px;
 }

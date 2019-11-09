@@ -56,18 +56,18 @@
   };
 </script>
 
-  <meta name="description" content="你来了，就不要走了！">
-<meta name="keywords" content="学习,Java,编程,个人博客,hexo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="KAI">
-<meta property="og:url" content="http://wlkare.github.io/tags/云/index.html">
+  <meta name="keywords" content="云">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯云服务器ubuntu系统切换root用户">
+<meta property="og:url" content="http://wlkare.github.io/2019/11/09/腾讯云服务器ubuntu系统切换root用户/index.html">
 <meta property="og:site_name" content="KAI">
-<meta property="og:description" content="你来了，就不要走了！">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://wlkare.github.io/2019/11/09/腾讯云服务器ubuntu系统切换root用户/ice.jpg">
+<meta property="og:updated_time" content="2019-11-09T14:17:28.860Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KAI">
-<meta name="twitter:description" content="你来了，就不要走了！">
-  <link rel="canonical" href="http://wlkare.github.io/tags/云/">
+<meta name="twitter:title" content="腾讯云服务器ubuntu系统切换root用户">
+<meta name="twitter:image" content="http://wlkare.github.io/2019/11/09/腾讯云服务器ubuntu系统切换root用户/ice.jpg">
+  <link rel="canonical" href="http://wlkare.github.io/2019/11/09/腾讯云服务器ubuntu系统切换root用户/">
 
 
 <script id="page-configurations">
@@ -75,13 +75,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: 云 | KAI</title>
+  <title>腾讯云服务器ubuntu系统切换root用户 | KAI</title>
   
 
 
@@ -225,30 +225,6 @@
 
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -288,93 +264,192 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block tag">
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">云<small>标签</small>
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://wlkare.github.io/2019/11/09/腾讯云服务器ubuntu系统切换root用户/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KAI">
+      <meta itemprop="description" content="你来了，就不要走了！">
+      <meta itemprop="image" content="/images/boy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KAI">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">腾讯云服务器ubuntu系统切换root用户
+
+          
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-09 21:19:11 / 修改时间：22:17:28" itemprop="dateCreated datePublished" datetime="2019-11-09T21:19:11+08:00">2019-11-09</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/09/腾讯云服务器ubuntu系统切换root用户/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/09/腾讯云服务器ubuntu系统切换root用户/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+        <img src="/2019/11/09/腾讯云服务器ubuntu系统切换root用户/ice.jpg">
 
-  
-  
+<a id="more"></a>
 
-  
+<p>在腾讯云购买服务器时，如果选择的是ubuntu系统，系统默认分配的用户是Ubuntu，若想要使用root账号，需要设置密码等操作，具体步骤如下：</p>
+<ol>
+<li>首先登陆腾讯云服务器，通过命令可查看到有两个用户，root和Ubuntu。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-17-ubuntu:~$ grep bash /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">ubuntu:x:500:500:ubuntu:/home/ubuntu:/bin/bash</span><br><span class="line">ubuntu@VM-0-17-ubuntu:~$</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用如下命令设置新密码：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-17-ubuntu:~$ sudo passwd root</span><br><span class="line">Enter new UNIX password:</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>再次输入密码确认，两次密码要一致。提示成功，说明密码设置完成。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-17-ubuntu:~$ sudo passwd root</span><br><span class="line">Enter new UNIX password: </span><br><span class="line">Retype new UNIX password: </span><br><span class="line">passwd: password updated successfully</span><br><span class="line">ubuntu@VM-0-17-ubuntu:~$</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>利用su root 命令切换root用户，输入密码，切换成功。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-17-ubuntu:~$ su root</span><br><span class="line">Password: </span><br><span class="line">root@VM-0-17-ubuntu:/home/ubuntu#</span><br></pre></td></tr></table></figure>
+
+<p>以上步骤完成后，可以实现root账户的登陆，但只能通过先登录ubuntu然后再切换root，不能直接通过服务器登陆到root用户，如想要直接登陆root用户（此操作可以省去很多麻烦事，比如各种权限的获取，只要还是懒。。。），参考以下操作：</p>
+<ol start="5">
+<li>输入如下指令，进入到sshd_config的界面。在配置文件中找到loginGreacetime 120。按下【i】回车，即可进入【「插入模式(Insert mode)」】，然后就能进行修改了。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>把PermitRootLogin 后面的修改为yes。注意如有有注释要去掉注释“#”。修改完成后，:x或:wq保存退出。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LoginGraceTime 2m</span><br><span class="line">PermitRootLogin yes</span><br><span class="line">StrictModes yes</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>最后再重启ssh就大功告成了。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-17-ubuntu:/home/ubuntu# sudo service ssh restart</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>然后关掉当前用户，重新打开，即可用root账户登陆了。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@VM-0-17-ubuntu:~#</span><br></pre></td></tr></table></figure>
+
+<p>当然，一定要注意的是，root用户是Linux环境下的超级管理用户，拥有非常大的权限。因此不建议大家日常使用root账号进行服务器操作。</p>
+
+    </div>
+
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+    
+    
         
-          <a class="post-title-link" href="/2019/11/09/腾讯云服务器ubuntu系统切换root用户/" itemprop="url">
-            <span itemprop="name">腾讯云服务器ubuntu系统切换root用户</span>
-          </a>
+      
+
+	  <div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+		
+	  </div>
+		
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/云/" rel="tag"># 云</a>
+            
+          </div>
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-09T21:19:11+08:00"
-              content="2019-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
         
-          <a class="post-title-link" href="/2019/11/04/三大数据域/" itemprop="url">
-            <span itemprop="name">三大数据域</span>
-          </a>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/04/三大数据域/" rel="next" title="三大数据域">
+                  <i class="fa fa-chevron-left"></i> 三大数据域
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-11-04T22:34:57+08:00"
-              content="2019-11-04">
-          11-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    </div>
+      </footer>
+    
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
           
+    
+    <div class="comments" id="comments"></div>
+  
 
         </div>
           
@@ -389,6 +464,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">

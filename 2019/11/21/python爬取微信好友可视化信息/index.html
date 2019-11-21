@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/K_Letter_32px.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/K_Letter_16px.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":12,"scrollpercent":true},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="微信已成为我们生活中很常用的通信软件了，也正是因为微信的流行与火爆，那些爬虫大佬就禁不住要盘一盘微信了，哈哈😊，作为小白，只能向大神不断学习。本文就简单记录一下使用python来爬取微信好友的一些信息。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬取微信好友可视化信息">
+<meta property="og:url" content="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/index.html">
+<meta property="og:site_name" content="KAI">
+<meta property="og:description" content="微信已成为我们生活中很常用的通信软件了，也正是因为微信的流行与火爆，那些爬虫大佬就禁不住要盘一盘微信了，哈哈😊，作为小白，只能向大神不断学习。本文就简单记录一下使用python来爬取微信好友的一些信息。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/percent.png">
+<meta property="og:image" content="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/好友分布.png">
+<meta property="og:image" content="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/csv.png">
+<meta property="og:image" content="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/error.png">
+<meta property="og:updated_time" content="2019-11-21T13:59:59.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python爬取微信好友可视化信息">
+<meta name="twitter:description" content="微信已成为我们生活中很常用的通信软件了，也正是因为微信的流行与火爆，那些爬虫大佬就禁不住要盘一盘微信了，哈哈😊，作为小白，只能向大神不断学习。本文就简单记录一下使用python来爬取微信好友的一些信息。">
+<meta name="twitter:image" content="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/percent.png">
+  <link rel="canonical" href="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>python爬取微信好友可视化信息 | KAI</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KAI</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-photos">
+      
+    
+
+    <a href="/photos/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>图片</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-说说">
+      
+    
+
+    <a href="/说说/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>说说</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-友链">
+      
+    
+
+    <a href="/friends/" rel="section"><i class="menu-item-icon fa fa-fw fa-group"></i> <br>友链</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://wlkare.github.io/2019/11/21/python爬取微信好友可视化信息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KAI">
+      <meta itemprop="description" content="你来了，就不要走了！">
+      <meta itemprop="image" content="/images/boy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KAI">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">python爬取微信好友可视化信息
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-21 21:09:52 / 修改时间：21:59:59" itemprop="dateCreated datePublished" datetime="2019-11-21T21:09:52+08:00">2019-11-21</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/21/python爬取微信好友可视化信息/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/21/python爬取微信好友可视化信息/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="note info">
+            <p>微信已成为我们生活中很常用的通信软件了，也正是因为微信的流行与火爆，那些爬虫大佬就禁不住要盘一盘微信了，哈哈😊，作为小白，只能向大神不断学习。本文就简单记录一下使用python来爬取微信好友的一些信息。</p>
+          </div>
+
+<a id="more"></a>
+
+<h2 id="itchat"><a href="#itchat" class="headerlink" title="itchat"></a>itchat</h2><p>在开始之前呢，首先要先介绍一下itchat。itchat是一个开源的微信个人号接口，它包含了丰富的微信API接口，itchat让使用python调用微信从未如此简单，具体关于itchat文档大家查看<a href="https://itchat.readthedocs.io/zh/" target="_blank" rel="noopener">itchat文档</a>。</p>
+<p>本次使用itchat，完成了个人微信登陆、好友按男女比例统计并画出可视化图形、好友分布地区统计、好友标签统计，当然，除了这些基本功能，还有更强大、更好玩的新式玩法等你开发。</p>
+<h2 id="安装所需要的库"><a href="#安装所需要的库" class="headerlink" title="安装所需要的库"></a>安装所需要的库</h2><p>首先，除了配置python的基本环境外（相信你已经完成），还需要安装好一些使用库，itchat、pyecharts、jieba库，安装方法就是通用的pip install <em>库名</em>，这里要注意的是，pyecharts最新版1.6与1.0之前的版本有很大的变动，因此，如果要按照本文方法进行操作时，需要指定其版本安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyecharts==0.1.9.4</span><br></pre></td></tr></table></figure>
+
+<p>当然你也可以使用最新版本，不过要先阅读下pyecharts的更新文档哦。<br>准备就绪后就开始进行代码编写吧。</p>
+<h2 id="微信登陆，好友信息获取"><a href="#微信登陆，好友信息获取" class="headerlink" title="微信登陆，好友信息获取"></a>微信登陆，好友信息获取</h2><p>性别人数统计，可视化图形输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itchat</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> Map,Geo</span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">itchat.login()</span><br><span class="line">friends = itchat.get_friends()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_var</span><span class="params">(var)</span>:</span></span><br><span class="line">    variable = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> friends:</span><br><span class="line">        value = i[var]</span><br><span class="line">        variable.append(value)</span><br><span class="line">    <span class="keyword">return</span> variable</span><br><span class="line"></span><br><span class="line">male = female = other = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> friends[<span class="number">1</span>:]:</span><br><span class="line">    sex = i[<span class="string">"Sex"</span>]</span><br><span class="line">    <span class="keyword">if</span> sex == <span class="number">1</span>:</span><br><span class="line">        male +=<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> sex == <span class="number">2</span>:</span><br><span class="line">        female +=<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        other += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">total = len(friends[<span class="number">1</span>:])</span><br><span class="line">a = float(male)/total*<span class="number">100</span></span><br><span class="line">b = float(female)/total*<span class="number">100</span></span><br><span class="line">c = float(other)/total*<span class="number">100</span></span><br><span class="line"></span><br><span class="line">x=[a,b,c]</span><br><span class="line">label = [<span class="string">'male'</span>,<span class="string">'female'</span>,<span class="string">'other'</span>]</span><br><span class="line">plt.pie(x=x, labels= label, autopct=<span class="string">'%3.1f%%'</span>,shadow=<span class="literal">True</span>, labeldistance=<span class="number">1.1</span>, startangle=<span class="number">90</span>,pctdistance=<span class="number">0.6</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>效果图如下：</p>
+<img src="/2019/11/21/python爬取微信好友可视化信息/percent.png">
+
+<h2 id="获取好友的所在地区省份信息"><a href="#获取好友的所在地区省份信息" class="headerlink" title="获取好友的所在地区省份信息"></a>获取好友的所在地区省份信息</h2><p>使用map方法统计标注地图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Province = get_var(<span class="string">'Province'</span>)</span><br><span class="line">data = pd.DataFrame(&#123;<span class="string">'prv'</span>:Province,<span class="string">'nu'</span>:<span class="number">1</span>&#125;)</span><br><span class="line">data = data.loc[data[<span class="string">'prv'</span>]!=<span class="string">''</span>,:]</span><br><span class="line">data = data.groupby([<span class="string">'prv'</span>]).sum().sort_values(by=<span class="string">'nu'</span>)</span><br><span class="line">provice = data.index.tolist()</span><br><span class="line">values = data.values.tolist()</span><br><span class="line"></span><br><span class="line">map = Map(<span class="string">"好友分布"</span>,<span class="string">'地区分布'</span>,width=<span class="number">1200</span>, height=<span class="number">600</span>)</span><br><span class="line">map.add(<span class="string">""</span>,provice,values,visual_range=[<span class="number">0</span>,<span class="number">50</span>],maptype=<span class="string">'china'</span>,is_visualma=<span class="literal">True</span>,</span><br><span class="line">        visual_text_color=<span class="string">'#000'</span>)</span><br><span class="line">map.show_config()</span><br><span class="line">map.render(path=<span class="string">"C:/path/pyTest/mapfriends.html"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行小地图结果，会发现你的朋友遍布全国各地😄。</p>
+<img src="/2019/11/21/python爬取微信好友可视化信息/好友分布.png">
+
+<h2 id="爬取好友的个性签名"><a href="#爬取好友的个性签名" class="headerlink" title="爬取好友的个性签名"></a>爬取好友的个性签名</h2><p>利用jieba方法进行中文分词，并输出csv格式文档。这里要注意的是，在数据保存为CSV时，encoding要设置为utf_8_sig，才能正常在文档中显示，不然会出现乱码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 爬取好友的个性签名</span></span><br><span class="line">siglist = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> friends:</span><br><span class="line">    signature = i[<span class="string">"Signature"</span>].strip().replace(<span class="string">"span"</span>, <span class="string">""</span>).replace(<span class="string">"class"</span>, <span class="string">""</span>).replace(<span class="string">"emoji"</span>, <span class="string">""</span>)</span><br><span class="line">    rep= re.compile(<span class="string">"1f\d+\w*|[&lt;&gt;/=]"</span>)</span><br><span class="line">    signature = rep.sub(<span class="string">""</span>, signature)</span><br><span class="line">    siglist.append(signature)</span><br><span class="line">text = <span class="string">""</span>.join(siglist)</span><br><span class="line"><span class="comment"># 中文分词</span></span><br><span class="line">wordlist = jieba.cut(text, cut_all=<span class="literal">True</span>)</span><br><span class="line">word_space_split = <span class="string">","</span>.join(wordlist).split(<span class="string">','</span>)</span><br><span class="line"><span class="comment"># 去掉所有停用词</span></span><br><span class="line">ph=open(<span class="string">"C:/Users/wang/Desktop/pyTest/tyc.txt"</span>,<span class="string">"rb"</span>)</span><br><span class="line">tyc=str(ph.read().decode(<span class="string">'utf-8'</span>))</span><br><span class="line">ph.close()</span><br><span class="line">m=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> word_space_split:</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> tyc:</span><br><span class="line">        m.append(i)</span><br><span class="line"><span class="comment"># 统计词频并保存为csv文件</span></span><br><span class="line">da=pd.DataFrame(&#123;<span class="string">'ci'</span>:m,<span class="string">'nu'</span>:<span class="number">1</span>&#125;)</span><br><span class="line">da=da.groupby([<span class="string">'ci'</span>]).sum().sort_values(by=<span class="string">'nu'</span>,ascending=<span class="literal">False</span>)</span><br><span class="line">da.to_csv(<span class="string">'C:/Users/wang/Desktop/pyTest/qianming.csv'</span>,encoding=<span class="string">"utf_8_sig"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>截取的表格数据：</p>
+<img src="/2019/11/21/python爬取微信好友可视化信息/csv.png">
+
+<h2 id="一些小问题"><a href="#一些小问题" class="headerlink" title="一些小问题"></a>一些小问题</h2><p>在使用matplotlib库绘制图形时，运行时出现Qt平台不能打开的问题（如图），参考了一些大佬的建议，可能是环境变量的问题，可参照这篇<a href="https://blog.csdn.net/qq_36523839/article/details/80495746" target="_blank" rel="noopener">博文</a>进行更改。</p>
+<img src="/2019/11/21/python爬取微信好友可视化信息/error.png">
+    </div>
+
+    
+    
+    
+        
+      
+
+	  <div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+		
+	  </div>
+		
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/python/" rel="tag"># python</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/09/腾讯云服务器ubuntu系统切换root用户/" rel="next" title="腾讯云服务器ubuntu系统切换root用户">
+                  <i class="fa fa-chevron-left"></i> 腾讯云服务器ubuntu系统切换root用户
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#itchat"><span class="nav-number">1.</span> <span class="nav-text">itchat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装所需要的库"><span class="nav-number">2.</span> <span class="nav-text">安装所需要的库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微信登陆，好友信息获取"><span class="nav-number">3.</span> <span class="nav-text">微信登陆，好友信息获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取好友的所在地区省份信息"><span class="nav-number">4.</span> <span class="nav-text">获取好友的所在地区省份信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬取好友的个性签名"><span class="nav-number">5.</span> <span class="nav-text">爬取好友的个性签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些小问题"><span class="nav-number">6.</span> <span class="nav-text">一些小问题</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/boy.jpeg"
+      alt="KAI">
+  <p class="site-author-name" itemprop="name">KAI</p>
+  <div class="site-description" itemprop="description">你来了，就不要走了！</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/wlkare" title="GitHub &rarr; https://github.com/wlkare" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://github.com" title="http://github.com" rel="noopener" target="_blank">GitHub</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://www.fontawesome.com.cn" title="http://www.fontawesome.com.cn" rel="noopener" target="_blank">Font</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+	<div id="days"></div>
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("09/01/2019 0:0:0");
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="已运行 "+daysold+" 天 "+hrsold+" 小时 "+minsold+" 分 "+seconds+" 秒";
+}
+function setzero(i) {
+    if (i<10) {
+        i="0" + i
+    };
+    return i;
+}
+show_date_time();
+</script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KAI</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.js"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'k3Mm6X376kb6vKPnSp5pJef2-gzGzoHsz',
+    appKey: '3XMaIeMQA1KzD91JHmy1QnG4',
+    placeholder: 'Just go go 留下邮箱，有回复时你将收到提醒，邮箱不会被公开。',
+    avatar: 'wavatar',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+  <!-- 看板娘动漫 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script src="/live2d-widget/autoload.js"></script>
+  
+  <!-- 动态背景图片 -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+  <script>
+  $("body").backstretch("/images/messageboard-bg.jpg");
+  </script> -->
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
+
